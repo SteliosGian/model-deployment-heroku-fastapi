@@ -3,7 +3,7 @@ import math
 import pandas as pd
 import numpy as np
 from sklearn.ensemble import RandomForestClassifier
-from starter.ml import model
+from starter.starter.ml import model
 
 @pytest.fixture
 def data():
