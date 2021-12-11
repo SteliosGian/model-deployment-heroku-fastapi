@@ -1,3 +1,5 @@
+import json
+from ml.data import process_data
 from sklearn.metrics import fbeta_score, precision_score, recall_score
 from sklearn.ensemble import RandomForestClassifier
 
@@ -62,3 +64,20 @@ def inference(model, X):
     """
     preds = model.predict(X)
     return preds
+
+
+def compute_performance_on_slices(model, test_data, cat_features, encoder, lb, ):
+    model_metrics_dict = {}
+    
+    for slice in test_data['education'].unique():
+        sliced_data= test_data[test_data['education'] == slice]
+        sliced_X, sliced_y, _, _ = process_data(sliced_data, categorical_features=cat_features, label="salary", training=False, encoder=encoder, lb=lb)
+
+        sliced_preds = model.predict(sliced_X)
+        precision, recall, fbeta = compute_model_metrics(sliced_y, sliced_preds)
+        model_metrics_dict[slice] = {"precision": precision, "recall": recall, "fbeta": fbeta}
+
+    with open("starter/model/slice_output.txt", "w") as file:
+        file.write(json.dumps(model_metrics_dict))
+    
+    return model_metrics_dict
