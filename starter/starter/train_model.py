@@ -41,5 +41,14 @@ X_test, y_test, _, _ = process_data(test, categorical_features=cat_features, lab
 trained_model = model.train_model(X_train, y_train)
 joblib.dump(trained_model, "starter/model/trained_model.joblib")
 
+# Get model predictions
+preds = model.inference(trained_model, X_test)
+
+# Compute model metrics
+precision, recall, fbeta = model.compute_model_metrics(y_test, preds)
+print(f"Precision: {round(precision,2)}")
+print(f"Recall: {round(recall,2)}")
+print(f"Fbeta: {round(fbeta,2)}")
+
 # Output model metrics on sliced data
 model.compute_performance_on_slices(trained_model, test, cat_features, encoder, lb)
