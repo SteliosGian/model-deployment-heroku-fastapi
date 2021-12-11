@@ -1,4 +1,5 @@
 import json
+import numpy as np
 import sys
 sys.path.insert(0, 'starter/starter')
 from ml.data import process_data
@@ -65,6 +66,7 @@ def inference(model, X):
         Predictions from the model.
     """
     preds = model.predict(X)
+    preds = np.where(preds == 0, '<=50K', '>50K')
     return preds
 
 
