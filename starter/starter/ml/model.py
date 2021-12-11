@@ -1,6 +1,6 @@
 import json
-# import sys
-# sys.path.insert(0, 'starter')
+import sys
+sys.path.insert(0, 'starter/starter')
 from ml.data import process_data
 from sklearn.metrics import fbeta_score, precision_score, recall_score
 from sklearn.ensemble import RandomForestClassifier
