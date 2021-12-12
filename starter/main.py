@@ -7,8 +7,9 @@ from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel, Field
 from typing import Callable, List
 import sys
-sys.path.insert(0, 'starter/starter')
-from starter.ml import model, data
+sys.path.insert(1, './starter/ml')
+sys.path.append('./starter/starter/ml')
+import model, data
 
 import os
 
