@@ -1,14 +1,15 @@
 import json
-import numpy as np
 import sys
 sys.path.insert(0, 'starter/starter')
+import numpy as np
+import pandas as pd
 from ml.data import process_data
 from sklearn.metrics import fbeta_score, precision_score, recall_score
 from sklearn.ensemble import RandomForestClassifier
 
 
 # Optional: implement hyperparameter tuning.
-def train_model(X_train, y_train):
+def train_model(X_train: np.array, y_train: np.array):
     """
     Trains a machine learning model and returns it.
 
@@ -29,7 +30,7 @@ def train_model(X_train, y_train):
     return random_forest
 
 
-def compute_model_metrics(y, preds):
+def compute_model_metrics(y: np.array, preds: np.array):
     """
     Validates the trained machine learning model using precision, recall, and F1.
 
@@ -51,7 +52,7 @@ def compute_model_metrics(y, preds):
     return precision, recall, fbeta
 
 
-def inference(model, X):
+def inference(model, X: np.array) -> np.array:
     """ Run model inferences and return the predictions.
 
     Inputs
@@ -70,7 +71,26 @@ def inference(model, X):
     return preds
 
 
-def compute_performance_on_slices(model, test_data, cat_features, encoder, lb, ):
+def compute_performance_on_slices(model, test_data: pd.DataFrame, cat_features: list, encoder, lb) -> dict:
+    """ Run model inferences and return the predictions.
+
+    Inputs
+    ------
+    model : Random Forest Classifier
+        Trained machine learning model.
+    test_data : pd.DataFrame
+        Data used for prediction.
+    cat_features : list
+        List of categorical features.
+    encoder : joblib file
+        One Hot encoder
+    lb : joblib file
+        Label encoder
+    Returns
+    -------
+    model_metrics_dict : dict
+        Dictionary with model metrics per slice.
+    """
     model_metrics_dict = {}
     
     for slice in test_data['education'].unique():

@@ -1,17 +1,17 @@
 # Put the code for your API here.
 import joblib
+import os
 import pandas as pd
 import numpy as np
 from fastapi import FastAPI, Body
 from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel, Field
-from typing import Callable, List
+from typing import List
 import sys
 sys.path.insert(1, './starter/ml')
 sys.path.append('./starter/starter/ml')
 import model, data
 
-import os
 
 if "DYNO" in os.environ and os.path.isdir(".dvc"):
     os.system("dvc config core.no_scm true")

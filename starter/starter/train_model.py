@@ -9,8 +9,6 @@ from ml.data import process_data
 from ml import model
 
 # Add code to load in the data.
-import os
-print(os.getcwd())
 data = pd.read_csv("starter/data/no-space-census.csv")
 
 # Optional enhancement, use K-fold cross validation instead of a train-test split.
